@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Generatore di Junit tests</title>
+  <link rel="stylesheet" href="css/bootStrapMin.css" /> <!-- Link file copiato da: https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css-->
+  <link rel="stylesheet" href="css/boostrapIcons.css" /> <!-- file copiato da: https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css -->
+  <link rel="stylesheet" href="css/jUnitsGeneratorStyle.css" />
+
+  <script src="js/htmlModificators.js"></script>
+  <script src="js/generatorUtils.js"></script>
+  <script src="js/saveLogic.js"></script>
+  <script src="js/generatorLogic.js"></script>
+  <script src="js/assertTransformationLogic.js"></script>
+  <script src="js/assertRicorsionLogic.js"></script>
+  <script src="js/Condizione.js"></script>
+  <script src="js/CondizioneDaVerificare.js"></script>
+  <script src="js/creazioneCondizioni.js"></script>
+
+
+
+
+  <script>
+    /** Queste funzioni servono per prendere elementi, dato che non è possibile chiamare il "document" dagli altri file js: */
+    // function getElementById(id){
+    //   return document.getElementById(id);
+    // }
+
+    // function getElementsByClassName(className){
+    //   return document.getElementsByClassName(className);
+    // }
+
+    // function querySelector(selector){
+    //   return document.querySelectorAll(selector);
+    // }
+
+  </script>
+
+</head>
+
+<body>
+  <div id="grid_body">
+    <div><!-- Questo div serve solo per creare una grid e centrare la visualizzazione--> </div>
+    <div id="divGridPieno">
+      <h1 style="text-align: center;">Generatore di Junit tests</h1>
+
+      <div id="condizioniComuni">
+        <p> Condizioni comuni a tutti i metodi (definizioni di variabili e simili) </p>
+        <textarea id="precondizioni_comuni" rows="10" cols="50"></textarea>
+      </div>
+      <div id="inputContainer">
+      </div>
+      <script>
+        let divAnnidato = document.createElement('div');
+        divAnnidato.classList.add("divInputChiudibile")
+        aggiungiInputsAnnidati(divAnnidato, "divInput", "inputContainer");
+      </script>
+
+      <div id="altreInformazioni">
+
+        <p> Nome del metodo di cui vanno generati i test (senzaParentesi nè argomenti es. mioMetodo):</p>
+        <textarea id="nomeMetodo" rows="3" cols="50"></textarea>
+        <i class="fas fa-angle-down"></i>
+        <p> Scrivi eventuali "throw" da lanciare (es. "throws Exception"):</p>
+        <textarea id="toBeThrown" rows="3" cols="50"></textarea>
+        <p> Nome del metodo come va chiamato (con oggetto chiamante, parentesi e argomenti es.
+          controller.mioMetodo(form)).
+          <br /> Nota che puoi anche per esempio chiamare result= controller.mioMetodo(form) per poi usare gli assert
+        </p>
+        <textarea id="nomeMetodoComeDaChiamare" rows="3" cols="50"></textarea>
+
+        <label for="flgCarryOneResult"> Se spunti questa casella, verranno usati tutti i casi true/false solo per
+          l'ultimo caso, mentre verrà solo preso il primo caso true e il primo caso false dei metodi esterni per
+          costruire quelli interni </label><br>
+        <input type="checkbox" id="flgCarryOneResult">
+        <p> Output: codice generato (va corretta la chiamata al metodo)</p>
+        <button onclick="generaOutput()">Genera Metodi</button><br>
+        <textarea id="output" rows="10" cols="50"></textarea>
+        <p> Sezione salvataggi:</p>
+        <textArea id="HTMLInputContainerRicostruzione" rows="10" cols="50"></textArea><br />
+        <button onclick="generaInputContainerDaCodiceSalvataggio()" style="width: 100%;"> Genera salvataggio da codice
+          di salvataggio</button><br /><br /><br />
+        <button onclick="generaCodiceSalvataggioInputContainer()" style="width: 100%;"> Genera codice di salvataggio a
+          partire dai dati presenti</button><br />
+        <textArea id="HTMLInputContainerSalvataggio" rows="10" cols="50"></textArea><br />
+      </div>
+    </div>
+    <div id="serveSoloPerGrid"><!-- Questo div serve solo per creare una grid e centrare la visualizzazione--> </div>
+  </div>
+
+</body>
+
+</html>
